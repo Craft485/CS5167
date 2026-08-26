@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CS5167 HW1B Coding Activity 1</title>
+  <link href="css/style.css" rel="stylesheet">
+  <script defer src="js/main.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="m-0">
+        Hi there, <i>Colin Davis</i>!
+      </p>
+      <time datetime="2026-08-26 11:09:23">Wed Aug 26 2026 11:09:23 AM</time>
+    </header>
+    <section class="content">
+      <div id="motivation-section">
+        <div>
+          <blockquote id="quote">
+            <p>
+              According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don't care what humans think is impossible.
+            </p>
+            &mdash;Barry B. Benson, <cite>Bee Movie</cite>
+          </blockquote>
+        </div>
+        <div class="image-container">
+          <img id="picture-of-the-day" src="./assets/cat.png" alt="Picture of the day showing a cat"/>
+        </div>
+      </div>
+      <hr />
+      <h2 id="feelings-container-label">How are you feeling today?</h2>
+      <div id="feelings-container">
+        <div class="energy">
+          <label for="hours-of-sleep">Hours of Sleep: </label>
+          <input id="hours-of-sleep" name="hours-of-sleep" placeholder="0"/>
+          <div id="energy-level-selection">
+            <div>
+              <input type="checkbox" name="energy-option-energetic" id="energy-option-energetic">
+              <label for="energy-option-energetic">Energetic</label>
+            </div>
+            <div>
+              <input type="checkbox" name="energy-option-motivated" id="energy-option-motivated">
+              <label for="energy-option-motivated">Motivated</label>
+            </div>
+            <div>
+              <input type="checkbox" name="energy-option-anxious" id="energy-option-anxious">
+              <label for="energy-option-anxious">Anxious</label>
+            </div>
+            <div>
+              <input type="checkbox" name="energy-option-foggy" id="energy-option-foggy">
+              <label for="energy-option-foggy">Foggy</label>
+            </div>
+            <div>
+              <input type="checkbox" name="energy-option-tired" id="energy-option-tired">
+              <label for="energy-option-tired">Tired</label>
+            </div>
+          </div>
+        </div>
+        <textarea name="daily-notes" rows="10" cols="30">No notes yet...</textarea>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
