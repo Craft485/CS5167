@@ -13,6 +13,7 @@ console.log("Pining for the fjords!");
 const CURRENT_DATE = new Date().toLocaleDateString("en-CA");
 /** @type {HTMLInputElement} */
 const SLEEP_INPUT = document.getElementById("sleep-update-btn");
+const SAVE_NOTES = document.getElementById("save-note");
 const AVERAGE_SLEEP_DISPLAY = document.getElementById("avg-hours-of-sleep");
 
 /** @type {Array<DataEntry>} */ 
@@ -78,6 +79,10 @@ function handleSleepInput() {
   computeAverageSleep();
 }
 
+function handleNoteUpdate() {
+  userData.at(-1).note = document.getElementById("daily-notes").value;
+}
+
 function setupListeners() {
   // ==== Checkboxes ====
   /** @type {HTMLInputElement[]} */
@@ -88,6 +93,9 @@ function setupListeners() {
 
   // ==== Sleep Input ====
   SLEEP_INPUT.addEventListener("click", handleSleepInput);
+
+  // ==== Notes ====
+  SAVE_NOTES.addEventListener("click", handleNoteUpdate);
 }
 
 /** Add the current data if its entry is missing */
