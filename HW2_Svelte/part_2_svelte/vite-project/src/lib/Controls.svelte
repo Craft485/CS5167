@@ -1,7 +1,10 @@
 <script>
   import PHCounterControl from "./PHCounterControl.svelte";
-    import QuotaControl from "./QuotaControl.svelte";
-    import TemperatureControl from "./TemperatureControl.svelte";
+  import QuotaControl from "./QuotaControl.svelte";
+  import RefillControl from "./RefillControl.svelte";
+  import VolumeControl from "./VolumeControl.svelte";
+
+  let { volume = $bindable(), quotaProgress, quota, refillCount = $bindable() } = $props()
 </script>
 
 <style>
@@ -15,6 +18,7 @@
 
 <div id="controls-container">
   <PHCounterControl />
-  <TemperatureControl />
+  <VolumeControl bind:volume={volume} />
+  <RefillControl bind:refillCount={refillCount} />
   <QuotaControl />
 </div>
