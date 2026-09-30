@@ -4,12 +4,6 @@
   let quotaProgress = $state(0);
 </script>
 
-<style>
-  input {
-    field-sizing: content;
-  }
-</style>
-
 <div id="quota-control-container">
   <span>Quota: </span>
   <input type="number" value={quotaProgress} max={quotaTotal} />

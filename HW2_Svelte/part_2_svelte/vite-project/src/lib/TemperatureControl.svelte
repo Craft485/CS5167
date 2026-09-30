@@ -10,9 +10,6 @@
       margin: 0;
       margin-right: 0.5rem;
     }
-    input {
-      field-sizing: content;
-    }
   }
 </style>
 

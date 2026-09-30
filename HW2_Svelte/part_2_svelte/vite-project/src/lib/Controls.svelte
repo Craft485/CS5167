@@ -8,6 +8,9 @@
 </script>
 
 <style>
+  :global(input[type="number"]) {
+    field-sizing: content;
+  }
   #controls-container {
     display: flex;
     justify-content: space-evenly;
