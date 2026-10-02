@@ -1,7 +1,8 @@
 <script>
   import PHCounterControl from "./PHCounterControl.svelte";
+  import TemperatureControl from "./TemperatureControl.svelte";
 
-  let { phLevel = $bindable() } = $props()
+  let { phLevel = $bindable(), temperature = $bindable() } = $props()
 </script>
 
 <style>
@@ -17,4 +18,5 @@
 
 <div id="controls-container">
   <PHCounterControl bind:phLevel={phLevel} />
+  <TemperatureControl bind:temperature={temperature} />
 </div>
