@@ -1,0 +1,34 @@
+<script>
+  import EmbeddedUIView from "./EmbeddedUIView.svelte";
+
+  let { widgets, refillCount = $bindable(), volume = $bindable() } = $props();
+</script>
+<style>
+  .content-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #mobile-ui-container {
+    border-radius: 55px;
+    border: solid thick grey;
+    height: 5.81in;
+    width: 2.82in;
+    background-color: darkgrey;
+    padding: 2px;
+  }
+</style>
+
+<div class="content-container">
+  <div id="mobile-ui-container">
+    <EmbeddedUIView
+      bind:refillCount={refillCount}
+      bind:volume={volume}
+      widgets={widgets}
+      contentScale={1}
+    />
+  </div>
+</div>

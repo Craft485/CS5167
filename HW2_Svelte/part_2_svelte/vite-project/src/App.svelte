@@ -6,6 +6,7 @@
     import HybridView from "./lib/HybridView.svelte";
     import LeftControlPanel from "./lib/LeftControlPanel.svelte";
     import RightControlPanel from "./lib/RightControlPanel.svelte";
+    import MobileUI from "./lib/MobileUI.svelte";
 
   interface Widget {
     icon: Component;
@@ -97,6 +98,13 @@
     </section>
     <section id="mobile-ui-focus">
       <h2>Mobile UI Focus View</h2>
+      <div class="section-content-container">
+        <MobileUI
+          bind:refillCount={refillCount}
+          bind:volume={currentVolumePercentage}
+          widgets={availableWidgets}
+        />
+      </div>
     </section>
   </main>
   <div class="control-panel">
