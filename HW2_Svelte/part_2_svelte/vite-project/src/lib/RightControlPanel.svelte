@@ -12,7 +12,10 @@
   #controls-container {
     display: flex;
     flex-direction: column;
-    margin-top: 10%;
+    gap: 5%;
+    padding-top: 10%;
+    height: 90%;
+    overflow-y: auto;
   }
 </style>
 
