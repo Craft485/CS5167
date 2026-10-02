@@ -31,6 +31,8 @@
     width: 50%;
     height: 40%;
     background-color: hsl(231, 14%, 10%);
+    padding: 2.5%;
+    border-radius: 30px;
   }
 </style>
 
