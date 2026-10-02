@@ -1,12 +1,11 @@
 <script lang="ts">
   // Is this a percentage or a unit of volume like ml?
-  let quotaTotal = $state(100);
-  let quotaProgress = $state(0);
+  let { quotaProgress = $bindable(), quotaTotal = $bindable() } = $props();
 </script>
 
 <div id="quota-control-container">
-  <span>Quota: </span>
-  <input type="number" value={quotaProgress} max={quotaTotal} />
+  <span>Goal (ml): </span>
+  <input type="number" bind:value={quotaProgress} max={quotaTotal} />
   /
-  <input type="number" value={quotaTotal} min={quotaProgress} />
+  <input type="number" bind:value={quotaTotal} min={quotaProgress} />
 </div>

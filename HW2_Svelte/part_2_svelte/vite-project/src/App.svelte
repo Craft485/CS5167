@@ -3,6 +3,9 @@
   import Controls from "./lib/Controls.svelte";
   import { icons } from "@lucide/svelte/icons";
     import EmbeddedUIView from "./lib/EmbeddedUIView.svelte";
+    import HybridView from "./lib/HybridView.svelte";
+    import LeftControlPanel from "./lib/LeftControlPanel.svelte";
+    import RightControlPanel from "./lib/RightControlPanel.svelte";
 
   interface Widget {
     icon: Component;
@@ -28,7 +31,7 @@
 <style>
   #page-content {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     height: 100vh;
     width: 100%;
   }
@@ -41,38 +44,64 @@
   }
 
   section {
+    display: flex;
+    flex-direction: column;
     width: 33%;
-    border-left: solid thin red;
-    border-right: solid thin red;
   }
 
   h2 {
     border: thin solid white;
     border-top: none;
   }
+
+  .section-content-container {
+    flex-grow: 1;
+  }
+
+  .control-panel {
+    height: 100svh;
+    width: 20%;
+  }
 </style>
 
 <div id="page-content">
-  <Controls
-    quota={quotaGoal}
-    quotaProgress={quotaProgress}
-    bind:volume={currentVolumePercentage}
-    bind:refillCount={refillCount}
-  />
+  <div class="control-panel">
+    <LeftControlPanel
+      bind:quota={quotaGoal}
+      bind:quotaProgress={quotaProgress}
+      bind:volume={currentVolumePercentage}
+      bind:refillCount={refillCount}
+    />
+  </div>
   <main>
     <section id="hybrid-view">
       <h2>Hybrid View</h2>
+      <div class="section-content-container">
+        <HybridView
+          bind:refillCount={refillCount}
+          bind:volume={currentVolumePercentage}
+          widgets={availableWidgets}
+        />
+      </div>
     </section>
     <section id="embedded-ui-focus">
       <h2>Embedded UI Focus View</h2>
-      <EmbeddedUIView
-        bind:refillCount={refillCount}
-        bind:volume={currentVolumePercentage}
-        widgets={availableWidgets}
-      />
+      <div class="section-content-container">
+        <EmbeddedUIView
+          bind:refillCount={refillCount}
+          bind:volume={currentVolumePercentage}
+          widgets={availableWidgets}
+          contentScale={1}
+        />
+      </div>
     </section>
     <section id="mobile-ui-focus">
       <h2>Mobile UI Focus View</h2>
     </section>
   </main>
+  <div class="control-panel">
+    <RightControlPanel
+      bind:phLevel={phLevel}
+    />
+  </div>
 </div>
