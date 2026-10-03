@@ -12,18 +12,19 @@
     textContent?: string | number;
   }
 
-  let phLevel = $state(0);
-  let currentVolumePercentage = $state(0.0);
+  let phLevel = $state(7.5);
+  let currentVolumePercentage = $state(25);
   let quotaProgress = $state(0);
   let quotaGoal = $state(100);
   let refillCount = $state(0);
-  let waterTemperature = $state(0);
-  let currentTime = $state("")
+  let waterTemperature = $state(50);
+  let currentTime = $state("");
+  let outdoorTemperature = $state(42);
 
   const availableWidgets = $derived([
     {
       icon: icons.CloudDrizzle,
-      textContent: "60°"
+      textContent: `${outdoorTemperature}° F`
     },
     {
       icon: icons.TestTubeDiagonal,
@@ -136,6 +137,7 @@
     <RightControlPanel
       bind:phLevel={phLevel}
       bind:temperature={waterTemperature}
+      bind:outdoorTemperature={outdoorTemperature}
     />
   </div>
 </div>

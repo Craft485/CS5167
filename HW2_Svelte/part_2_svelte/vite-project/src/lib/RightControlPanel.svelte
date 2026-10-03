@@ -2,7 +2,7 @@
   import PHCounterControl from "./PHCounterControl.svelte";
   import TemperatureControl from "./TemperatureControl.svelte";
 
-  let { phLevel = $bindable(), temperature = $bindable() } = $props()
+  let { phLevel = $bindable(), temperature = $bindable(), outdoorTemperature = $bindable() } = $props()
 </script>
 
 <style>
@@ -21,5 +21,12 @@
 
 <div id="controls-container">
   <PHCounterControl bind:phLevel={phLevel} />
-  <TemperatureControl bind:temperature={temperature} />
+  <div>
+    <span>Water Temp:</span>
+    <TemperatureControl bind:temperature={temperature} />
+  </div>
+  <div>
+    <span>Outdoor Temp:</span>
+    <TemperatureControl bind:temperature={outdoorTemperature}/>
+  </div>
 </div>
