@@ -19,7 +19,7 @@
     width: 100%;
     justify-content: center;
     align-items: center;
-    background-image: url("hybrid-view-bg.png");
+    background-image: url("https://raw.githubusercontent.com/Craft485/CS5167/refs/heads/master/HW2_Svelte/part_2_svelte/vite-project/public/hybrid-view-bg.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
