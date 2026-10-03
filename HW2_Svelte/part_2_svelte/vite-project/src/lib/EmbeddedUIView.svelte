@@ -4,17 +4,18 @@
 
   interface Widget {
     icon: Component;
-    textContent?: string;
+    textContent?: string | number;
   }
 
   interface EmbeddedUIView {
     widgets: Widget[];
     refillCount: number;
     volume: number;
+    waterTemperature?: number;
     contentScale: number;
   }
 
-  let { widgets, refillCount = $bindable(), volume = $bindable(), contentScale }: Readonly<EmbeddedUIView> = $props();
+  let { widgets, refillCount = $bindable(), volume = $bindable(), waterTemperature = $bindable(), contentScale }: Readonly<EmbeddedUIView> = $props();
 </script>
 
 <style>
@@ -50,7 +51,7 @@
   }
 </style>
 
-<div class="embedded-view-container" style="--scale-factor: {contentScale};">
+<div class="embedded-view-container" style="--scale-factor: {contentScale}; --water-temp: {waterTemperature}">
   <section class="widgets">
     {#each widgets as widget}
       <Widget icon={widget.icon} textContent={widget.textContent} scale={contentScale}/>

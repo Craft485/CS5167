@@ -1,16 +1,15 @@
 <script lang="ts">
   import type { Component } from "svelte";
-  import Controls from "./lib/Controls.svelte";
   import { icons } from "@lucide/svelte/icons";
-    import EmbeddedUIView from "./lib/EmbeddedUIView.svelte";
-    import HybridView from "./lib/HybridView.svelte";
-    import LeftControlPanel from "./lib/LeftControlPanel.svelte";
-    import RightControlPanel from "./lib/RightControlPanel.svelte";
-    import MobileUI from "./lib/MobileUI.svelte";
+  import EmbeddedUIView from "./lib/EmbeddedUIView.svelte";
+  import HybridView from "./lib/HybridView.svelte";
+  import LeftControlPanel from "./lib/LeftControlPanel.svelte";
+  import RightControlPanel from "./lib/RightControlPanel.svelte";
+  import MobileUI from "./lib/MobileUI.svelte";
 
   interface Widget {
     icon: Component;
-    textContent?: string;
+    textContent?: string | number;
   }
 
   let phLevel = $state(0);
@@ -18,15 +17,34 @@
   let quotaProgress = $state(0);
   let quotaGoal = $state(100);
   let refillCount = $state(0);
+  let waterTemperature = $state(0);
+  let currentTime = $state("")
 
-  const availableWidgets = [
+  const availableWidgets = $derived([
     {
       icon: icons.CloudDrizzle,
+      textContent: "60°"
     },
     {
       icon: icons.TestTubeDiagonal,
+      textContent: phLevel,
+    },
+    {
+      icon: icons.Thermometer,
+      textContent: `${waterTemperature}° F`,
+    },
+    {
+      icon: icons.Clock,
+      textContent: currentTime,
     }
-  ] satisfies Widget[]
+  ] satisfies Widget[]);
+
+  function updateTime() {
+    currentTime = new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false })    
+  }
+
+  setInterval(updateTime, 6000);
+  updateTime();
 </script>
 
 <style>
@@ -81,6 +99,7 @@
         <HybridView
           bind:refillCount={refillCount}
           bind:volume={currentVolumePercentage}
+          bind:waterTemperature={waterTemperature}
           widgets={availableWidgets}
         />
       </div>
@@ -110,6 +129,7 @@
   <div class="control-panel">
     <RightControlPanel
       bind:phLevel={phLevel}
+      bind:temperature={waterTemperature}
     />
   </div>
 </div>

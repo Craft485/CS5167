@@ -4,7 +4,7 @@
   interface Widget {
     icon: Component;
     scale: number;
-    textContent?: string;
+    textContent?: string | number;
   }
 
   let { icon, scale, textContent }: Readonly<Widget> = $props()

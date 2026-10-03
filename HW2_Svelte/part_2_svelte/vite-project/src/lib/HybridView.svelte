@@ -4,15 +4,16 @@
   
   interface Widget {
     icon: Component;
-    textContent?: string;
+    textContent?: string | number;
   }
 
   interface HybridViewProps {
     widgets: Widget[];
     refillCount: number;
     volume: number;
+    waterTemperature: number;
   }
-  let { refillCount = $bindable(), volume = $bindable(), widgets }: Readonly<HybridViewProps> = $props()
+  let { refillCount = $bindable(), volume = $bindable(), waterTemperature = $bindable(), widgets }: Readonly<HybridViewProps> = $props()
 </script>
 <style>
   #hybrid-view-container {
@@ -30,13 +31,14 @@
   .hybrid-content-container {
     width: 50%;
     height: 40%;
-    background-color: hsl(231, 14%, 10%);
     padding: 2.5%;
     border-radius: 30px;
+    background: black;
+    background: linear-gradient(0deg, rgba(calc(-255 * (1 - (var(--water-temp) / 212)) + 255), 0, calc(255 * (1 - (var(--water-temp) / 212))), 1) 11%, rgba(26, 20, 20, 1) 100%);
   }
 </style>
 
-<div id="hybrid-view-container">
+<div id="hybrid-view-container" style="--water-temp: {waterTemperature}">
   <div class="hybrid-content-container">
     <EmbeddedUIView
       bind:refillCount={refillCount}
