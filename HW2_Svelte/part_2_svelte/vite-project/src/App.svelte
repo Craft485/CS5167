@@ -8,6 +8,7 @@
   import MobileUI from "./lib/MobileUI.svelte";
 
   interface Widget {
+    name: string;
     icon: Component;
     textContent?: string | number;
   }
@@ -23,22 +24,28 @@
 
   const availableWidgets = $derived([
     {
+      name: "weather",
       icon: icons.CloudDrizzle,
       textContent: `${outdoorTemperature}° F`
     },
     {
+      name: "ph",
       icon: icons.TestTubeDiagonal,
       textContent: phLevel,
     },
     {
+      name: "water-temp",
       icon: icons.Thermometer,
       textContent: `${waterTemperature}° F`,
     },
     {
+      name: "time",
       icon: icons.Clock,
       textContent: currentTime,
     }
   ] satisfies Widget[]);
+
+  let activeWidgets = $state(["weather", "ph", "water-temp", "time"]);
 
   function updateTime() {
     currentTime = new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false })    
@@ -108,7 +115,8 @@
           bind:waterTemperature={waterTemperature}
           bind:quotaProgress={quotaProgress}
           bind:quotaGoal={quotaGoal}
-          widgets={availableWidgets}
+          bind:widgets={activeWidgets}
+          availableWidgets={availableWidgets}
         />
       </div>
     </section>
@@ -120,7 +128,8 @@
           bind:volume={currentVolumePercentage}
           bind:quotaGoal={quotaGoal}
           bind:quotaProgress={quotaProgress}
-          widgets={availableWidgets}
+          bind:widgets={activeWidgets}
+          availableWidgets={availableWidgets}
           contentScale={1}
         />
       </div>
@@ -133,7 +142,8 @@
           bind:volume={currentVolumePercentage}
           bind:quotaGoal={quotaGoal}
           bind:quotaProgress={quotaProgress}
-          widgets={availableWidgets}
+          bind:widgets={activeWidgets}
+          availableWidgets={availableWidgets}
           waterTemp={waterTemperature}
         />
       </div>

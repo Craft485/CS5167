@@ -5,9 +5,10 @@
     refillCount = $bindable(),
     volume = $bindable(),
     waterTemperature = $bindable(),
-    widgets,
+    widgets = $bindable(),
     quotaGoal = $bindable(),
     quotaProgress = $bindable(),
+    availableWidgets,
   } = $props();
 </script>
 
@@ -41,7 +42,8 @@
       bind:volume={volume}
       bind:quotaGoal={quotaGoal}
       bind:quotaProgress={quotaProgress}
-      widgets={widgets}
+      bind:widgets={widgets}
+      availableWidgets={availableWidgets}
       contentScale={0.5}
     />
   </div>

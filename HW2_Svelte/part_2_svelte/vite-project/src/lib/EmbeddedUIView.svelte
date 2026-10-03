@@ -1,15 +1,27 @@
 <script>
+  import { CircleMinus } from "@lucide/svelte";
   import Widget from "./Widget.svelte";
 
   let {
-    widgets,
+    widgets = $bindable(),
+    availableWidgets,
     refillCount = $bindable(),
     volume = $bindable(),
     waterTemperature = $bindable(),
     contentScale,
     quotaGoal = $bindable(),
     quotaProgress = $bindable(),
+    configMenuEnabled = false,
   } = $props();
+
+  let activeWidgets = $derived(widgets.map((/** @type {string} */widgetName) => availableWidgets.find((/** @type {{name: string}} */widget) => widget.name === widgetName)));
+
+  /**
+   * @param {string} widgetName
+   */
+  function removeWidget(widgetName) {
+    widgets = widgets.filter((/** @type {string} */ widget) => widget !== widgetName);
+  }
 </script>
 
 <style>
@@ -48,12 +60,33 @@
     font-size: 8px;
     padding-bottom: 15px;
   }
+
+  .widget-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .remove-widget-btn {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    cursor: pointer;
+    z-index: 100;
+  }
 </style>
 
 <div class="embedded-view-container" style="--scale-factor: {contentScale}; --water-temp: {waterTemperature}">
   <section class="widgets">
-    {#each widgets as widget}
-      <Widget icon={widget.icon} textContent={widget.textContent} scale={contentScale}/>
+    {#each activeWidgets as widget}
+      <div class="widget-container">
+        <Widget icon={widget.icon} textContent={widget.textContent} scale={contentScale}/>
+        <div class="remove-widget-btn">
+          {#if configMenuEnabled === true}
+            <CircleMinus color="red" size="16" onclick={() => removeWidget(widget.name)} />
+          {/if}
+        </div>
+      </div>
     {/each}
   </section>
   <section class="embedded-view-main-display">

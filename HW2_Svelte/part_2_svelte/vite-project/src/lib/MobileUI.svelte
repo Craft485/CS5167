@@ -2,14 +2,36 @@
   import EmbeddedUIView from "./EmbeddedUIView.svelte";
 
   let {
-    widgets,
+    availableWidgets,
+    widgets = $bindable(),
     refillCount = $bindable(),
     volume = $bindable(),
     waterTemp,
     quotaGoal = $bindable(),
     quotaProgress = $bindable(),
   } = $props();
+
+  let config = $state(false);
+
+  let addableWidgets = $derived(availableWidgets.map((/** @type {{name: string}} */ w) => w.name).filter((/** @type {string}*/ w) => !widgets.includes(w)));
+
+  function toggleConfig() {
+    config = !config;
+  }
+
+  function addWidget() {
+    // @ts-ignore We don't care that value can be undefined, we already have handlers for that
+    const widgetName = document.getElementById("widget-select")?.value ?? "";
+    if (widgetName === "") {
+      return;
+    }
+    const newWidget = availableWidgets.find((/** @type {{name: string}} */ widget) => widget.name === widgetName);
+    if (newWidget !== undefined) {
+      widgets.push(newWidget.name);
+    }
+  }
 </script>
+
 <style>
   .content-container {
     width: 100%;
@@ -41,27 +63,50 @@
     padding: 5% 0;
     border-top: medium solid white;
     outline: none;
-    cursor: not-allowed;
-    color: rgb(89, 89, 89);
+    cursor: pointer;
+    color: white;
     font-size: large;
     background: black;
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
-    /* TODO: Remove if I implement proper mobile configuration */
-    text-decoration: line-through;
+  }
+
+  #add-widget-container {
+    position: absolute;
+    top: 20%
   }
 </style>
 
 <div class="content-container">
   <div id="mobile-ui-container" style="--water-temp: {waterTemp};">
+    <div id="add-widget-container">
+      {#if config === true && widgets.length < 4}
+        <label for="widget-select">Choose a widget to add: </label>
+        <select name="widget-select" id="widget-select">
+          <option value="">-- Please select an option --</option>
+          {#each addableWidgets as widgetName}
+            <option value={widgetName}>{widgetName}</option>
+          {/each}
+        </select>
+        <button onclick={addWidget}>Add Widget</button>
+      {/if}
+    </div>
     <EmbeddedUIView
       bind:refillCount={refillCount}
       bind:volume={volume}
       bind:quotaGoal={quotaGoal}
       bind:quotaProgress={quotaProgress}
-      widgets={widgets}
+      bind:widgets={widgets}
+      availableWidgets={availableWidgets}
+      configMenuEnabled={config}
       contentScale={1}
     />
-    <button class="mobile-configure-btn">Configure</button>
+    <button class="mobile-configure-btn" onclick={toggleConfig}>
+      {#if config === false}
+        Configure
+      {:else}
+        Save and Exit
+      {/if}
+    </button>
   </div>
 </div>
