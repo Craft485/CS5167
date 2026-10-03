@@ -81,6 +81,11 @@
     height: 100svh;
     width: 20%;
   }
+
+  .embedded-ui-content {
+    background: black;
+    background: linear-gradient(0deg, rgba(calc(-255 * (1 - (var(--water-temp) / 212)) + 255), 0, calc(255 * (1 - (var(--water-temp) / 212))), 1) 0%, rgba(26, 20, 20, 1) 50%);
+  }
 </style>
 
 <div id="page-content">
@@ -106,7 +111,7 @@
     </section>
     <section id="embedded-ui-focus">
       <h2>Embedded UI Focus View</h2>
-      <div class="section-content-container">
+      <div class="section-content-container embedded-ui-content" style="--water-temp: {waterTemperature};">
         <EmbeddedUIView
           bind:refillCount={refillCount}
           bind:volume={currentVolumePercentage}
@@ -122,6 +127,7 @@
           bind:refillCount={refillCount}
           bind:volume={currentVolumePercentage}
           widgets={availableWidgets}
+          waterTemp={waterTemperature}
         />
       </div>
     </section>

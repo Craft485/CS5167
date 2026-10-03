@@ -34,7 +34,7 @@
     padding: 2.5%;
     border-radius: 30px;
     background: black;
-    background: linear-gradient(0deg, rgba(calc(-255 * (1 - (var(--water-temp) / 212)) + 255), 0, calc(255 * (1 - (var(--water-temp) / 212))), 1) 11%, rgba(26, 20, 20, 1) 100%);
+    background: linear-gradient(0deg, rgba(calc(-255 * (1 - (var(--water-temp) / 212)) + 255), 0, calc(255 * (1 - (var(--water-temp) / 212))), 1) 0%, rgba(26, 20, 20, 1) 50%);
   }
 </style>
 

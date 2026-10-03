@@ -1,7 +1,7 @@
 <script>
   import EmbeddedUIView from "./EmbeddedUIView.svelte";
 
-  let { widgets, refillCount = $bindable(), volume = $bindable() } = $props();
+  let { widgets, refillCount = $bindable(), volume = $bindable(), waterTemp } = $props();
 </script>
 <style>
   .content-container {
@@ -18,8 +18,9 @@
     border: solid thick grey;
     height: 5.81in;
     width: 2.82in;
-    background-color: hsl(231, 14%, 10%);
     padding: 5px;
+    background: black;
+    background: linear-gradient(0deg, rgba(calc(-255 * (1 - (var(--water-temp) / 212)) + 255), 0, calc(255 * (1 - (var(--water-temp) / 212))), 1) 0%, rgba(26, 20, 20, 1) 50%);
   }
 
   .mobile-configure-btn {
@@ -36,13 +37,16 @@
     cursor: not-allowed;
     color: rgb(89, 89, 89);
     font-size: large;
+    background: black;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
     /* TODO: Remove if I implement proper mobile configuration */
     text-decoration: line-through;
   }
 </style>
 
 <div class="content-container">
-  <div id="mobile-ui-container">
+  <div id="mobile-ui-container" style="--water-temp: {waterTemp};">
     <EmbeddedUIView
       bind:refillCount={refillCount}
       bind:volume={volume}
