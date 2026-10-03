@@ -1,21 +1,15 @@
-<script lang="ts">
-  import type { Component } from "svelte";
-    import Widget from "./Widget.svelte";
+<script>
+  import Widget from "./Widget.svelte";
 
-  interface Widget {
-    icon: Component;
-    textContent?: string | number;
-  }
-
-  interface EmbeddedUIView {
-    widgets: Widget[];
-    refillCount: number;
-    volume: number;
-    waterTemperature?: number;
-    contentScale: number;
-  }
-
-  let { widgets, refillCount = $bindable(), volume = $bindable(), waterTemperature = $bindable(), contentScale }: Readonly<EmbeddedUIView> = $props();
+  let {
+    widgets,
+    refillCount = $bindable(),
+    volume = $bindable(),
+    waterTemperature = $bindable(),
+    contentScale,
+    quotaGoal = $bindable(),
+    quotaProgress = $bindable(),
+  } = $props();
 </script>
 
 <style>
@@ -42,12 +36,17 @@
   }
 
   .fill {
-    border: thin solid black;
+    border: 2px solid white;
     border-radius: 100%;
     width: calc(50px * var(--scale-factor));
     height: calc(50px * var(--scale-factor));
     background: black;
-    background: linear-gradient(0deg, blue var(--progress), white var(--progress));
+    background: linear-gradient(0deg, blue var(--progress), black var(--progress));
+  }
+
+  #goal-container {
+    font-size: 8px;
+    padding-bottom: 15px;
   }
 </style>
 
@@ -58,6 +57,11 @@
     {/each}
   </section>
   <section class="embedded-view-main-display">
+    <div id="goal-container">
+      Todays Goal:
+      <br />
+      {quotaProgress}ml / {quotaGoal}ml ({(quotaProgress / quotaGoal).toFixed(2)}%)
+    </div>
     <div class="fill" style="--progress: {volume}%;"></div>
     <span>{refillCount}</span>
   </section>

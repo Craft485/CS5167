@@ -13,7 +13,7 @@
   }
 
   let phLevel = $state(7.5);
-  let currentVolumePercentage = $state(25);
+  let currentVolumePercentage = $state(33.33);
   let quotaProgress = $state(0);
   let quotaGoal = $state(100);
   let refillCount = $state(0);
@@ -106,6 +106,8 @@
           bind:refillCount={refillCount}
           bind:volume={currentVolumePercentage}
           bind:waterTemperature={waterTemperature}
+          bind:quotaProgress={quotaProgress}
+          bind:quotaGoal={quotaGoal}
           widgets={availableWidgets}
         />
       </div>
@@ -116,6 +118,8 @@
         <EmbeddedUIView
           bind:refillCount={refillCount}
           bind:volume={currentVolumePercentage}
+          bind:quotaGoal={quotaGoal}
+          bind:quotaProgress={quotaProgress}
           widgets={availableWidgets}
           contentScale={1}
         />
@@ -127,6 +131,8 @@
         <MobileUI
           bind:refillCount={refillCount}
           bind:volume={currentVolumePercentage}
+          bind:quotaGoal={quotaGoal}
+          bind:quotaProgress={quotaProgress}
           widgets={availableWidgets}
           waterTemp={waterTemperature}
         />

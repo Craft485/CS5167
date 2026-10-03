@@ -1,7 +1,14 @@
 <script>
   import EmbeddedUIView from "./EmbeddedUIView.svelte";
 
-  let { widgets, refillCount = $bindable(), volume = $bindable(), waterTemp } = $props();
+  let {
+    widgets,
+    refillCount = $bindable(),
+    volume = $bindable(),
+    waterTemp,
+    quotaGoal = $bindable(),
+    quotaProgress = $bindable(),
+  } = $props();
 </script>
 <style>
   .content-container {
@@ -50,6 +57,8 @@
     <EmbeddedUIView
       bind:refillCount={refillCount}
       bind:volume={volume}
+      bind:quotaGoal={quotaGoal}
+      bind:quotaProgress={quotaProgress}
       widgets={widgets}
       contentScale={1}
     />

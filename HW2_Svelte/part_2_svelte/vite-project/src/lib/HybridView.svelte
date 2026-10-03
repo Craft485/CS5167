@@ -1,20 +1,16 @@
-<script lang="ts">
-    import type { Component } from "svelte";
+<script>
   import EmbeddedUIView from "./EmbeddedUIView.svelte";
   
-  interface Widget {
-    icon: Component;
-    textContent?: string | number;
-  }
-
-  interface HybridViewProps {
-    widgets: Widget[];
-    refillCount: number;
-    volume: number;
-    waterTemperature: number;
-  }
-  let { refillCount = $bindable(), volume = $bindable(), waterTemperature = $bindable(), widgets }: Readonly<HybridViewProps> = $props()
+  let {
+    refillCount = $bindable(),
+    volume = $bindable(),
+    waterTemperature = $bindable(),
+    widgets,
+    quotaGoal = $bindable(),
+    quotaProgress = $bindable(),
+  } = $props();
 </script>
+
 <style>
   #hybrid-view-container {
     display: flex;
@@ -43,6 +39,8 @@
     <EmbeddedUIView
       bind:refillCount={refillCount}
       bind:volume={volume}
+      bind:quotaGoal={quotaGoal}
+      bind:quotaProgress={quotaProgress}
       widgets={widgets}
       contentScale={0.5}
     />
