@@ -1,4 +1,5 @@
 <script>
+    import { GitBranch, Info, Newspaper } from "@lucide/svelte";
   import QuotaControl from "./QuotaControl.svelte";
   import RefillControl from "./RefillControl.svelte";
   import VolumeControl from "./VolumeControl.svelte";
@@ -9,6 +10,7 @@
     quota = $bindable(),
     refillCount = $bindable(),
     daysSinceCleaned = $bindable(),
+    infoToggle = $bindable(),
   } = $props();
 
   function drink() {
@@ -23,6 +25,10 @@
 
   function clean() {
     daysSinceCleaned = 0;
+  }
+
+  function toggleInfo() {
+    infoToggle = !infoToggle;
   }
 </script>
 
@@ -51,6 +57,28 @@
   hr {
     width: 90%;
   }
+
+  #links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  #info-btn {
+    width: initial;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5% 5%;
+    gap: 2px;
+  }
 </style>
 
 <div id="controls-container">
@@ -64,4 +92,20 @@
   <button onclick={drink}>Click to Drink</button>
   <button onclick={refill}>Click to Refill</button>
   <button onclick={clean}>Click to Clean</button>
+  <hr />
+  <div id="links">
+    "Smart Water Bottle" by Colin Davis
+    <span>
+      <GitBranch />
+      <a href="https://github.com/Craft485/CS5167/tree/master/HW2_Svelte/part_2_svelte/vite-project">View Source Code</a>
+    </span>
+    <span>
+      <Newspaper />
+      <a href="https://sites.google.com/view/portfoliocolindavis/ui-project-1-documentation">Project Documentation</a>
+    </span>
+    <button id="info-btn" onclick={toggleInfo}>
+      <Info />
+      Info
+    </button>
+  </div>
 </div>
