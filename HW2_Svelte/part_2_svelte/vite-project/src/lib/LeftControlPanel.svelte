@@ -3,7 +3,13 @@
   import RefillControl from "./RefillControl.svelte";
   import VolumeControl from "./VolumeControl.svelte";
 
-  let { volume = $bindable(), quotaProgress = $bindable(), quota = $bindable(), refillCount = $bindable() } = $props();
+  let {
+    volume = $bindable(),
+    quotaProgress = $bindable(),
+    quota = $bindable(),
+    refillCount = $bindable(),
+    daysSinceCleaned = $bindable(),
+  } = $props();
 
   function drink() {
     volume -= 10;
@@ -13,6 +19,10 @@
   function refill() {
     volume = 100;
     refillCount++;
+  }
+
+  function clean() {
+    daysSinceCleaned = 0;
   }
 </script>
 
@@ -53,4 +63,5 @@
   <hr />
   <button onclick={drink}>Click to Drink</button>
   <button onclick={refill}>Click to Refill</button>
+  <button onclick={clean}>Click to Clean</button>
 </div>

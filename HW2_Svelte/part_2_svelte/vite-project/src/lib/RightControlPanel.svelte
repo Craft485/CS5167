@@ -1,8 +1,14 @@
 <script>
+    import CleanControl from "./CleanControl.svelte";
   import PHCounterControl from "./PHCounterControl.svelte";
   import TemperatureControl from "./TemperatureControl.svelte";
 
-  let { phLevel = $bindable(), temperature = $bindable(), outdoorTemperature = $bindable() } = $props()
+  let {
+    phLevel = $bindable(),
+    temperature = $bindable(),
+    outdoorTemperature = $bindable(),
+    daysSinceCleaned = $bindable(),
+  } = $props()
 </script>
 
 <style>
@@ -29,4 +35,5 @@
     <span>Outdoor Temp:</span>
     <TemperatureControl bind:temperature={outdoorTemperature}/>
   </div>
+  <CleanControl bind:daysSinceCleaned={daysSinceCleaned} />
 </div>

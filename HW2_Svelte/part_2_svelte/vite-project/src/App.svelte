@@ -21,6 +21,7 @@
   let waterTemperature = $state(50);
   let currentTime = $state("");
   let outdoorTemperature = $state(42);
+  let daysSinceCleaned = $state(0);
 
   const availableWidgets = $derived([
     {
@@ -35,17 +36,22 @@
     },
     {
       name: "water-temp",
-      icon: icons.Thermometer,
+      icon: icons.Droplet,
       textContent: `${waterTemperature}° F`,
     },
     {
       name: "time",
       icon: icons.Clock,
       textContent: currentTime,
+    },
+    {
+      name: "last-cleaned",
+      icon: icons.MopSparkles,
+      textContent: daysSinceCleaned,
     }
   ] satisfies Widget[]);
 
-  let activeWidgets = $state(["weather", "ph", "water-temp", "time"]);
+  let activeWidgets = $state(["weather", "last-cleaned", "water-temp", "time"]);
 
   function updateTime() {
     currentTime = new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false })    
@@ -103,6 +109,7 @@
       bind:quotaProgress={quotaProgress}
       bind:volume={currentVolumePercentage}
       bind:refillCount={refillCount}
+      bind:daysSinceCleaned={daysSinceCleaned}
     />
   </div>
   <main>
@@ -154,6 +161,7 @@
       bind:phLevel={phLevel}
       bind:temperature={waterTemperature}
       bind:outdoorTemperature={outdoorTemperature}
+      bind:daysSinceCleaned={daysSinceCleaned}
     />
   </div>
 </div>
